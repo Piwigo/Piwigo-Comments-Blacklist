@@ -1,0 +1,1 @@
+Define a list of words which are not authorized in a comment.
