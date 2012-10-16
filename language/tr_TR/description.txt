@@ -1,0 +1,1 @@
+Yorumlarda izin verilmeyen kelimelerin listesini tanımlamanızı sağlar.
