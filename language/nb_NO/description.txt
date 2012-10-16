@@ -1,0 +1,1 @@
+Definer noen ord som ikke er lov å bruke i kommentarer.
