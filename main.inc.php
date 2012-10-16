@@ -35,6 +35,8 @@ if (defined('IN_ADMIN'))
 else
 {
   add_event_handler('user_comment_check', 'comm_blacklist_user_comment_check', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
+  add_event_handler('user_comment_check_albums', 'comm_blacklist_user_comment_check', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
+  add_event_handler('user_comment_check_guestbook', 'comm_blacklist_user_comment_check', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
   include_once(COMM_BLACKLIST_PATH . 'include/functions.inc.php');
 }
 
@@ -48,6 +50,7 @@ function comm_blacklist_init()
   
   // apply upgrade if needed
   if (
+    COMM_BLACKLIST_VERSION == 'auto' or 
     $pwg_loaded_plugins[COMM_BLACKLIST_ID]['version'] == 'auto' or
     version_compare($pwg_loaded_plugins[COMM_BLACKLIST_ID]['version'], COMM_BLACKLIST_VERSION, '<')
   )
@@ -55,7 +58,7 @@ function comm_blacklist_init()
     include_once(COMM_BLACKLIST_PATH . 'include/install.inc.php');
     comm_blacklist_install();
     
-    if ($pwg_loaded_plugins[COMM_BLACKLIST_ID]['version'] != 'auto')
+    if ( $pwg_loaded_plugins[COMM_BLACKLIST_ID]['version'] != 'auto' and COMM_BLACKLIST_VERSION != 'auto' )
     {
       $query = '
 UPDATE '. PLUGINS_TABLE .'

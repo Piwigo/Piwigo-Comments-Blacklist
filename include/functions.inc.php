@@ -10,7 +10,13 @@ function comm_blacklist_user_comment_check($comment_action, $comm)
     return $comment_action;
   }
   
-  $blacklist = file(COMM_BLACKLIST_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  $blacklist = @file(COMM_BLACKLIST_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+  
+  if (empty($blacklist))
+  {
+    return $comment_action;
+  }
+  
   $blacklist = array_map(create_function('$w', 'return " ".preg_quote($w)." ";'), $blacklist);
   $blacklist = implode('|', $blacklist);
 

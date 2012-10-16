@@ -18,7 +18,7 @@ if (isset($_POST['save_config']))
 // template vars
 $template->assign($conf['comments_blacklist']);
 $template->assign(array(
-  'blacklist' => file_get_contents(COMM_BLACKLIST_FILE),
+  'blacklist' => @file_get_contents(COMM_BLACKLIST_FILE),
   'COMM_BLACKLIST_PATH'=> get_root_url() . COMM_BLACKLIST_PATH,
   'COMM_BLACKLIST_ADMIN' => COMM_BLACKLIST_ADMIN,
   ));
