@@ -1,0 +1,1 @@
+Definēt sarakstu ar vārdiem, kas nav autorizēti lietošanai komentāros.
