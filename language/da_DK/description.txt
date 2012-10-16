@@ -1,0 +1,1 @@
+Definer en liste over ord, som ikke er tilladte i en kommentar.
