@@ -1,0 +1,1 @@
+Ausschlußliste (Blacklist) der Worte die ignoriert werden sollen
