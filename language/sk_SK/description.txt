@@ -1,0 +1,1 @@
+Definovanie zoznamu slov, ktoré nie sú povolené v komentári.
