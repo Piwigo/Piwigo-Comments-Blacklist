@@ -1,0 +1,1 @@
+Defina uma lista de palavras que não são autorizadas no comentário.
