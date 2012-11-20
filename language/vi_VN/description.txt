@@ -1,0 +1,1 @@
+Định nghĩa một danh sách các từ không được phép dùng để viết lời bình.
