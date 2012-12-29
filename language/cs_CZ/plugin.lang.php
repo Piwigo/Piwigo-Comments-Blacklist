@@ -21,4 +21,6 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['one word per line, case insensitive'] = 'jedno slovo na řádek';
+$lang['Blacklist'] = 'Černá listina';
+$lang['Moderate'] = 'mírný';
 ?>
