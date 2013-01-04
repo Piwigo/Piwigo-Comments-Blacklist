@@ -1,0 +1,1 @@
+Määrittele lista sanoista, jotka eivät ole sallittuja kommenteissa.
