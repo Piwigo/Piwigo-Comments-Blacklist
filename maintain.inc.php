@@ -21,7 +21,7 @@ function plugin_activate()
 
 function plugin_uninstall() 
 {
-  @unlink(PWG_LOCAL_DIR . 'comments_blacklist.txt');
+  @unlink(PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
 }
 
 ?>

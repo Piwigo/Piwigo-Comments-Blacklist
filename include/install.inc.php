@@ -15,9 +15,9 @@ function comm_blacklist_install()
     $conf['comments_blacklist'] = $comm_blacklist_default_config;
   }
   
-  if ( file_exists(PWG_LOCAL_DIR) and !file_exists(PWG_LOCAL_DIR . 'comments_blacklist.txt') ) 
+  if (!file_exists(PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt')) 
   {
-    touch(PWG_LOCAL_DIR . 'comments_blacklist.txt');
+    touch(PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
   }
 
 }

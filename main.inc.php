@@ -13,7 +13,7 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 defined('COMM_BLACKLIST_ID') or define('COMM_BLACKLIST_ID', basename(dirname(__FILE__)));
 define('COMM_BLACKLIST_PATH' ,   PHPWG_PLUGINS_PATH . COMM_BLACKLIST_ID . '/');
 define('COMM_BLACKLIST_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . COMM_BLACKLIST_ID);
-define('COMM_BLACKLIST_FILE',    PWG_LOCAL_DIR . 'comments_blacklist.txt');
+define('COMM_BLACKLIST_FILE',    PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
 define('COMM_BLACKLIST_VERSION', 'auto');
 
 
