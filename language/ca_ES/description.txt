@@ -1,0 +1,1 @@
+Permet definir una llista de paraules prohibides per als comentaris.
