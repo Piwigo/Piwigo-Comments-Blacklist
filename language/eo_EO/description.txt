@@ -1,0 +1,1 @@
+Difinas liston de vortoj, kiuj ne rijtigitas en komento.
