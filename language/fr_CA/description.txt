@@ -1,0 +1,1 @@
+Définissez une liste de mots interdits dans les commentaires.
