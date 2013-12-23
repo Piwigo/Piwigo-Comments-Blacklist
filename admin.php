@@ -3,6 +3,8 @@ defined('COMM_BLACKLIST_PATH') or die('Hacking attempt!');
  
 global $template, $page;
 
+load_language('plugin.lang', COMM_BLACKLIST_PATH);
+
 // save config
 if (isset($_POST['save_config']))
 {
@@ -12,7 +14,7 @@ if (isset($_POST['save_config']))
     
   file_put_contents(COMM_BLACKLIST_FILE, $_POST['content']);
   conf_update_param('comments_blacklist', serialize($conf['comments_blacklist']));
-  array_push($page['infos'], l10n('Information data registered in database'));
+  $page['infos'][] = l10n('Information data registered in database');
 }
   
 // template vars
@@ -26,5 +28,3 @@ $template->assign(array(
 // send page content
 $template->set_filename('comm_blacklist_content', realpath(COMM_BLACKLIST_PATH . 'admin.tpl'));
 $template->assign_var_from_handle('ADMIN_CONTENT', 'comm_blacklist_content');
-
-?>

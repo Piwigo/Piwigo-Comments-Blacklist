@@ -1,27 +1,56 @@
 <?php
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-defined('COMM_BLACKLIST_ID') or define('COMM_BLACKLIST_ID', basename(dirname(__FILE__)));
-include_once(PHPWG_PLUGINS_PATH . COMM_BLACKLIST_ID . '/include/install.inc.php');
-
-
-function plugin_install() 
+class comments_blacklist_maintain extends PluginMaintain
 {
-  comm_blacklist_install();
-  define('comm_blacklist_installed', true);
-}
-
-function plugin_activate()
-{
-  if (!defined('comm_blacklist_installed'))
+  private $installed = false;
+  
+  private $default_conf = array(
+    'action' => 'reject',
+    );
+    
+  private $file;
+  
+  function __contruct($plugin_id)
   {
-    comm_blacklist_install();
+    parent::_construct($plugin_id);
+    $this->file = PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt';
+  }
+
+  function install($plugin_version, &$errors=array())
+  {
+    global $conf, $prefixeTable;
+
+    if (empty($conf['comments_blacklist']))
+    {
+      $conf['comments_blacklist'] = serialize($this->default_conf);
+      conf_update_param('comments_blacklist', $conf['comments_blacklist']);
+    }
+    
+    if (!file_exists($this->file)) 
+    {
+      touch($this->file);
+    }
+
+    $this->installed = true;
+  }
+
+  function activate($plugin_version, &$errors=array())
+  {
+    if (!$this->installed)
+    {
+      $this->install($plugin_version, $errors);
+    }
+  }
+
+  function deactivate()
+  {
+  }
+
+  function uninstall()
+  {
+    conf_delete_param('comments_blacklist');
+
+    @unlink($this->file);
   }
 }
-
-function plugin_uninstall() 
-{
-  @unlink(PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
-}
-
-?>
