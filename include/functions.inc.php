@@ -5,7 +5,7 @@ function comm_blacklist_user_comment_check($comment_action, $comm)
 {
   global $conf;
   
-  if ( $comment_action==$conf['comments_blacklist']['action'] or $comment_action=='reject' )
+  if ($comment_action==$conf['comments_blacklist']['action'] or $comment_action=='reject')
   {
     return $comment_action;
   }
@@ -17,12 +17,12 @@ function comm_blacklist_user_comment_check($comment_action, $comm)
     return $comment_action;
   }
   
-  $blacklist = array_map(create_function('$w', 'return " ".preg_quote($w)." ";'), $blacklist);
+  $blacklist = array_map(create_function('$w', 'return preg_quote($w);'), $blacklist);
   $blacklist = implode('|', $blacklist);
-
-  $content = str_replace(array("\r\n","\n"), ' ', $comm['content']);
   
-  if ( preg_match('#('.$blacklist.')#i', ' '.$comm['author'].' ') or preg_match('#('.$blacklist.')#i', ' '.$content.' ') )
+  if (preg_match('#\b('.$blacklist.')\b#i', $comm['author']) or
+      preg_match('#\b('.$blacklist.')\b#i', $comm['content'])
+    )
   {
     return $conf['comments_blacklist']['action'];
   }
