@@ -11,9 +11,9 @@ class comments_blacklist_maintain extends PluginMaintain
     
   private $file;
   
-  function __contruct($plugin_id)
+  function __construct($plugin_id)
   {
-    parent::_construct($plugin_id);
+    parent::__construct($plugin_id);
     $this->file = PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt';
   }
 
