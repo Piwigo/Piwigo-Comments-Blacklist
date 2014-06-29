@@ -3,8 +3,6 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 class comments_blacklist_maintain extends PluginMaintain
 {
-  private $installed = false;
-  
   private $default_conf = array(
     'action' => 'reject',
     );
@@ -19,32 +17,22 @@ class comments_blacklist_maintain extends PluginMaintain
 
   function install($plugin_version, &$errors=array())
   {
-    global $conf, $prefixeTable;
+    global $conf;
 
     if (empty($conf['comments_blacklist']))
     {
-      $conf['comments_blacklist'] = serialize($this->default_conf);
-      conf_update_param('comments_blacklist', $conf['comments_blacklist']);
+      conf_update_param('comments_blacklist', $this->default_conf, true);
     }
     
     if (!file_exists($this->file)) 
     {
       touch($this->file);
     }
-
-    $this->installed = true;
   }
 
-  function activate($plugin_version, &$errors=array())
+  function update($old_version, $new_version, &$errors=array())
   {
-    if (!$this->installed)
-    {
-      $this->install($plugin_version, $errors);
-    }
-  }
-
-  function deactivate()
-  {
+    $this->install($new_version, $errors);
   }
 
   function uninstall()

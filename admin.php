@@ -13,7 +13,7 @@ if (isset($_POST['save_config']))
     );
     
   file_put_contents(COMM_BLACKLIST_FILE, $_POST['content']);
-  conf_update_param('comments_blacklist', serialize($conf['comments_blacklist']));
+  conf_update_param('comments_blacklist', $conf['comments_blacklist']);
   $page['infos'][] = l10n('Information data registered in database');
 }
   

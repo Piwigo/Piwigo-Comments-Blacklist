@@ -10,14 +10,16 @@ Author URI: http://www.strangeplanet.fr
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-define('COMM_BLACKLIST_ID',      basename(dirname(__FILE__)));
-define('COMM_BLACKLIST_PATH' ,   PHPWG_PLUGINS_PATH . COMM_BLACKLIST_ID . '/');
-define('COMM_BLACKLIST_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . COMM_BLACKLIST_ID);
-define('COMM_BLACKLIST_FILE',    PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
-define('COMM_BLACKLIST_VERSION', 'auto');
+global $conf;
+
+define('COMM_BLACKLIST_ID',    basename(dirname(__FILE__)));
+define('COMM_BLACKLIST_PATH' , PHPWG_PLUGINS_PATH . COMM_BLACKLIST_ID . '/');
+define('COMM_BLACKLIST_ADMIN', get_root_url() . 'admin.php?page=plugin-' . COMM_BLACKLIST_ID);
+define('COMM_BLACKLIST_FILE',  PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
 
 
-add_event_handler('init', 'comm_blacklist_init');
+$conf['comments_blacklist'] = safe_unserialize($conf['comments_blacklist']);
+
 
 if (defined('IN_ADMIN'))
 {
@@ -28,20 +30,6 @@ else
   add_event_handler('user_comment_check', 'comm_blacklist_user_comment_check', EVENT_HANDLER_PRIORITY_NEUTRAL, 2);
 }
 
-
-/**
- * plugin initialization
- */
-function comm_blacklist_init()
-{
-  global $conf;
-  
-  include_once(COMM_BLACKLIST_PATH . 'maintain.inc.php');
-  $maintain = new comments_blacklist_maintain(COMM_BLACKLIST_ID);
-  $maintain->autoUpdate(COMM_BLACKLIST_VERSION, 'install');
-  
-  $conf['comments_blacklist'] = unserialize($conf['comments_blacklist']);
-}
 
 /**
  * admin link
