@@ -10,11 +10,21 @@ Author URI: http://www.strangeplanet.fr
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+if (basename(dirname(__FILE__)) != 'comments_blacklist')
+{
+  add_event_handler('init', 'comments_blacklist_error');
+  function comments_blacklist_error()
+  {
+    global $page;
+    $page['errors'][] = 'Comments Blacklist folder name is incorrect, uninstall the plugin and rename it to "comments_blacklist"';
+  }
+  return;
+}
+
 global $conf;
 
-define('COMM_BLACKLIST_ID',    basename(dirname(__FILE__)));
-define('COMM_BLACKLIST_PATH' , PHPWG_PLUGINS_PATH . COMM_BLACKLIST_ID . '/');
-define('COMM_BLACKLIST_ADMIN', get_root_url() . 'admin.php?page=plugin-' . COMM_BLACKLIST_ID);
+define('COMM_BLACKLIST_PATH' , PHPWG_PLUGINS_PATH . 'comments_blacklist/');
+define('COMM_BLACKLIST_ADMIN', get_root_url() . 'admin.php?page=plugin-comments_blacklist');
 define('COMM_BLACKLIST_FILE',  PHPWG_ROOT_PATH . PWG_LOCAL_DIR . 'comments_blacklist.txt');
 
 
