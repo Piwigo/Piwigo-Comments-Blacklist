@@ -6,6 +6,7 @@ Description: Define a list of words which are not authorized in a comment.
 Plugin URI: auto
 Author: Mistic
 Author URI: http://www.strangeplanet.fr
+Has Settings: true
 */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
@@ -74,7 +75,12 @@ function comm_blacklist_user_comment_check($comment_action, $comm)
     return $comment_action;
   }
   
-  $blacklist = array_map(create_function('$w', 'return preg_quote($w);'), $blacklist);
+  $func = function($w) 
+  {
+    return preg_quote($w);
+  };
+
+  $blacklist = array_map($func, $blacklist);
   $blacklist = implode('|', $blacklist);
   
   if (preg_match('#\b('.$blacklist.')\b#i', $comm['content']) or
